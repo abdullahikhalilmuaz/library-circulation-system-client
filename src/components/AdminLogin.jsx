@@ -3,7 +3,8 @@ import "../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const BASE_ADMIN_API_URL = "https://circulation-system-server-ql2i.onrender.com/api/admin/auth/login";
+const BASE_ADMIN_API_URL =
+  "https://circulation-system-server-ql2i.onrender.com/api/admin/auth/login";
 
 export default function AdminLogin() {
   const [adminLogin, setAdminLogin] = useState({
@@ -55,7 +56,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="home">
+    <div className="home admin-form">
       <div className="container">
         <form className="myform" onSubmit={handleFormLogin}>
           <h3>

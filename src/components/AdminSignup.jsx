@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "../styles/login.css";
 import { toast } from "react-toastify";
 
-const BASE_ADMIN_API_URL = "https://circulation-system-server-ql2i.onrender.com/api/admin/auth/signup";
+const BASE_ADMIN_API_URL =
+  "https://circulation-system-server-ql2i.onrender.com/api/admin/auth/signup";
 
 export default function AdminSignup() {
   const [adminSignup, setAdminSignup] = useState({
@@ -17,9 +18,9 @@ export default function AdminSignup() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAdminSignup(prev => ({
+    setAdminSignup((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -35,10 +36,10 @@ export default function AdminSignup() {
       const { confirmPassword, ...adminData } = adminSignup;
       const res = await fetch(BASE_ADMIN_API_URL, {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify(adminData)
+        body: JSON.stringify(adminData),
       });
 
       const data = await res.json();
@@ -48,7 +49,7 @@ export default function AdminSignup() {
       }
 
       toast.success(data.message || "Admin registered successfully!");
-      
+
       // Clear form
       setAdminSignup({
         firstname: "",
@@ -57,7 +58,7 @@ export default function AdminSignup() {
         email: "",
         password: "",
         confirmPassword: "",
-        role: "admin"
+        role: "admin",
       });
     } catch (err) {
       toast.error(err.message);
@@ -65,67 +66,65 @@ export default function AdminSignup() {
   };
 
   return (
-    <>
-      <div className="home">
-        <div className="container">
-          <form className="myform" onSubmit={handleFormSignup}>
-            <h3>
-              Admin Registration <em>👋</em>
-            </h3>
-            <div>
-              <input
-                type="text"
-                name="firstname"
-                placeholder="First Name"
-                value={adminSignup.firstname}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Last Name"
-                value={adminSignup.lastname}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={adminSignup.username}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={adminSignup.email}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={adminSignup.password}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                value={adminSignup.confirmPassword}
-                onChange={handleChange}
-                required
-              />
-              <button type="submit">Register Admin</button>
-            </div>
-          </form>
-        </div>
+    <div className="home admin-form">
+      <div className="container">
+        <form className="myform" onSubmit={handleFormSignup}>
+          <h3>
+            Admin Registration <em>👋</em>
+          </h3>
+          <div>
+            <input
+              type="text"
+              name="firstname"
+              placeholder="First Name"
+              value={adminSignup.firstname}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="lastname"
+              placeholder="Last Name"
+              value={adminSignup.lastname}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={adminSignup.username}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={adminSignup.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={adminSignup.password}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={adminSignup.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Register Admin</button>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 }

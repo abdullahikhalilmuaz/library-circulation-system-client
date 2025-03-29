@@ -1,102 +1,117 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-/*    
-     font-family: "Pacifico", cursive;
-     font-family: "Kanit", sans-serif;
-     font-family: "Roboto Slab", serif;
-     font-family: "Oswald", sans-serif;
-  */
-.container {
-  height: 100vh;
+/* General Styles */
+.home {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-.container form {
-  height: 80%;
-  width: 400px;
-}
-.container form img {
-  height: 100%;
+
+.container {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  font-family: "Roboto Slab", serif;
-  font-family: "Kanit", sans-serif;
+  max-width: 400px;
+  padding: 2rem;
 }
+
 .myform {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  font-family: "Pacifico", cursive;
-  gap: 10px;
-  padding: 2px 0px;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
-.myform em {
-  font-size: 30px;
+
+.myform:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
+
+.myform h3 {
+  color: #2d3748;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.myform h3 em {
+  font-style: normal;
+}
+
 .myform div {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 1rem;
 }
-.myform .mydiv {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  font-size: 11px;
-  text-align: right;
-  font-family: "Pacifico", cursive;
-  font-family: "Kanit", sans-serif;
-}
+
 .myform input {
-  width: 90%;
-  height: 40px;
-  padding: 0px 10px;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
   outline: none;
-  font-family: "Pacifico", cursive;
-  font-family: "Kanit", sans-serif;
-  font-family: "Roboto Slab", serif;
-  font-family: "Oswald", sans-serif;
-  font-family: "Kanit", sans-serif;
-  font-style: italic;
-  font-size: 15px;
-  border: 0px;
-  border-bottom: 1px solid;
 }
-.myform a {
-  font-family: cursive;
-  text-decoration: none;
-  color: grey;
-  font-style: italic;
+
+.myform input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
-.myform input::placeholder {
-  color: rgb(44, 44, 1);
-  font-family: "Pacifico", cursive;
-  font-family: "Kanit", sans-serif;
-  font-family: cursive;
-  font-style: italic;
-  font-size: 12px;
-}
-.myform .second-div {
-  display: flex;
-  gap: 8px;
-}
-.myform .second-div button {
-  height: 35px;
-  border: 0px;
-  background-color: rgb(107, 107, 7);
-  color: white;
+
+.myform button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  font-family: "Pacifico", cursive;
-  font-family: "Kanit", sans-serif;
+  transition: all 0.3s ease;
 }
-.myform .second-div p {
-  text-align: right;
+
+.myform button[type="submit"] {
+  background: #667eea;
+  color: white;
+}
+
+.myform button[type="submit"]:hover {
+  background: #5a67d8;
+  transform: translateY(-2px);
+}
+
+.myform button[type="button"] {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.myform button[type="button"]:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+/* Admin specific styles */
+.admin-form .myform {
+  border-top: 4px solid #f56565;
+}
+
+.admin-form h3 {
+  color: #f56565;
+}
+
+.admin-form button[type="submit"] {
+  background: #f56565;
+}
+
+.admin-form button[type="submit"]:hover {
+  background: #e53e3e;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .myform {
+    padding: 1.5rem;
+  }
 }

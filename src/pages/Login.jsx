@@ -3,10 +3,11 @@ import "../styles/login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const BASE_API_URL = "https://circulation-system-server-ql2i.onrender.com/api/auth/login";
+const BASE_API_URL =
+  "https://circulation-system-server-ql2i.onrender.com/api/auth/login";
 
 export default function Login() {
-  const [userLogin, setUserLogin] = useState({git 
+  const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
   });
@@ -57,38 +58,36 @@ export default function Login() {
   };
 
   return (
-    <>
-      <div className="home">
-        <div className="container">
-          <form className="myform" onSubmit={handleFormLogin}>
-            <h3>
-              Welcome back <em>👋</em>
-            </h3>
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="email"
-                value={userLogin.email}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={userLogin.password}
-                onChange={handleChange}
-                required
-              />
-              <button type="submit">Login</button>
-              <Link to="/register">
-                <button type="button">Signup</button>
-              </Link>
-            </div>
-          </form>
-        </div>
+    <div className="home">
+      <div className="container">
+        <form className="myform" onSubmit={handleFormLogin}>
+          <h3>
+            Welcome back <em>👋</em>
+          </h3>
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={userLogin.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={userLogin.password}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Login</button>
+            <Link to="/register">
+              <button type="button">Signup</button>
+            </Link>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 }
