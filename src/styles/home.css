@@ -1,0 +1,112 @@
+.home-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-container-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: white;
+  border-bottom: 0.1px solid rgba(97, 95, 95, 0.1);
+}
+.home-container-header .nav2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+  width: 10%;
+  /* background-color: red; */
+}
+
+.home-container-bottom-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  background-color: white;
+  font-size: 20px;
+  border-top: 0.1px solid rgba(97, 95, 95, 0.1);
+}
+.home-container-content-container {
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.home-container-content-container::-webkit-scrollbar {
+  display: none;
+}
+/* 
+.home-container-bottom-nav div {
+  /* background-color: gainsboro; */
+/* cursor: pointer;
+  color: rgb(44, 40, 40);
+  padding: 6px 10px;
+  border-radius: 50%; */
+/* } */
+/* .home-container-bottom-nav .home-nav {
+  background-color: rgb(34, 31, 31);
+  padding: 6px 10px;
+  color: white; */
+/* border-radius: 50%; */
+/* } */
+*/
+
+/* some necessary changes*/
+
+.home-container-bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  /* width: 100%; */
+  padding: 10px 0;
+  background: #fff;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.nav-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.nav-label {
+  font-size: 12px;
+  text-align: center;
+}
