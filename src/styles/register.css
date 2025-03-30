@@ -11,11 +11,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  height: 50px;
-  background-color: white;
   display: flex;
   flex-direction: row;
+  right: 0;
+  height: 50px;
+  width: 100%;
+  background-color: white;
   justify-content: space-between;
   padding: 0px 20px;
   box-sizing: border-box;
@@ -32,15 +33,33 @@
 }
 
 .header .toggle-users {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+.header .toggle-navs {
   width: 15%;
   display: flex;
   justify-content: space-between;
 }
 
-.header .toggle-navs {
-  width: 15%;
-  display: flex;
-  justify-content: space-between;
+@media only screen and (max-width: 770px) {
+  .header .toggle-users {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .header .toggle-navs {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .content {
