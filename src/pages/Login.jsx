@@ -82,9 +82,6 @@ export default function Login() {
               required
             />
             <button type="submit">Login</button>
-            <Link to="/register">
-              <button type="button">Signup</button>
-            </Link>
           </div>
         </form>
       </div>

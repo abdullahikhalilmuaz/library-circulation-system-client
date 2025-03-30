@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import AdminDashboard from "./components/AdminDashboard";
 import Register from "./pages/Register";
 import { useEffect } from "react";
-
+import "./styles/app.css";
 
 export default function App() {
   return (

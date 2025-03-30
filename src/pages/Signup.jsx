@@ -124,9 +124,6 @@ export default function Signup({ role }) {
               required
             />
             <button type="submit">Signup</button>
-            <Link to="/login">
-              <button type="button">Login</button>
-            </Link>
           </div>
         </form>
       </div>
