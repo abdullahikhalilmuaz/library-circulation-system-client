@@ -1,3 +1,7 @@
+const GET_ALL_BOOKS_URL = "http://localhost:3000/api/books/all";
+const GET_RECENT_USERS = "http://localhost:3000/api/dashboard/stats";
+const GET_POPULAR_BOOKS = "http://localhost:3000/api/books/popular";
+
 import { useEffect, useState } from "react";
 import {
   FiUsers,
@@ -26,114 +30,76 @@ import "../styles/dashboard.css";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
 const HomeComponent = () => {
-  const [dashboardData, setDashboardData] = useState(null);
+  const [dashboardData, setDashboardData] = useState({
+    totalBooks: 5,
+    availableBooks: 876,
+    checkedOutBooks: 367,
+    totalUsers: 542,
+    pendingApprovals: 23,
+    overdueBooks: 15,
+    recentUsers: [],
+    popularBooks: [],
+    bookStatusData: [
+      { name: "Available", value: 876 },
+      { name: "Checked Out", value: 367 },
+      { name: "Overdue", value: 15 },
+    ],
+    monthlyCheckouts: [
+      { name: "Jan", checkouts: 120 },
+      { name: "Feb", checkouts: 98 },
+      { name: "Mar", checkouts: 150 },
+      { name: "Apr", checkouts: 110 },
+      { name: "May", checkouts: 180 },
+      { name: "Jun", checkouts: 210 },
+    ],
+  });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const userData = JSON.parse(localStorage.getItem("dear-user"));
 
   useEffect(() => {
-    // Simulate API call to fetch dashboard data
-    const fetchDashboardData = async () => {
+    const fetchData = async () => {
       try {
-        // In a real app, you would fetch this from your backend
-        const mockData = {
-          totalBooks: 1243,
-          availableBooks: 876,
-          checkedOutBooks: 367,
-          totalUsers: 542,
-          activeUsers: 328,
-          pendingApprovals: 23,
-          overdueBooks: 15,
-          recentUsers: [
-            {
-              id: 1,
-              name: "John Doe",
-              email: "john@example.com",
-              lastLogin: "2023-06-15T10:30:00",
-            },
-            {
-              id: 2,
-              name: "Jane Smith",
-              email: "jane@example.com",
-              lastLogin: "2023-06-15T09:15:00",
-            },
-            {
-              id: 3,
-              name: "Robert Johnson",
-              email: "robert@example.com",
-              lastLogin: "2023-06-14T16:45:00",
-            },
-            {
-              id: 4,
-              name: "Emily Davis",
-              email: "emily@example.com",
-              lastLogin: "2023-06-14T14:20:00",
-            },
-            {
-              id: 5,
-              name: "Michael Wilson",
-              email: "michael@example.com",
-              lastLogin: "2023-06-14T11:10:00",
-            },
-          ],
-          popularBooks: [
-            {
-              id: 1,
-              title: "The Great Gatsby",
-              author: "F. Scott Fitzgerald",
-              checkouts: 42,
-            },
-            {
-              id: 2,
-              title: "To Kill a Mockingbird",
-              author: "Harper Lee",
-              checkouts: 38,
-            },
-            { id: 3, title: "1984", author: "George Orwell", checkouts: 35 },
-            {
-              id: 4,
-              title: "Pride and Prejudice",
-              author: "Jane Austen",
-              checkouts: 31,
-            },
-            {
-              id: 5,
-              title: "The Hobbit",
-              author: "J.R.R. Tolkien",
-              checkouts: 28,
-            },
-          ],
-          bookStatusData: [
-            { name: "Available", value: 876 },
-            { name: "Checked Out", value: 367 },
-            { name: "Overdue", value: 15 },
-          ],
-          monthlyCheckouts: [
-            { name: "Jan", checkouts: 120 },
-            { name: "Feb", checkouts: 98 },
-            { name: "Mar", checkouts: 150 },
-            { name: "Apr", checkouts: 110 },
-            { name: "May", checkouts: 180 },
-            { name: "Jun", checkouts: 210 },
-          ],
-        };
+        setLoading(true);
 
-        setDashboardData(mockData);
-      } catch (error) {
-        console.error("Error fetching dashboard data:", error);
+        // Fetch recent users data
+        const usersRes = await fetch(GET_RECENT_USERS);
+        if (!usersRes.ok) throw new Error("Failed to fetch users data");
+        const usersData = await usersRes.json();
+
+        // Fetch popular books data
+        const booksRes = await fetch(GET_POPULAR_BOOKS);
+        if (!booksRes.ok) throw new Error("Failed to fetch books data");
+        const booksData = await booksRes.json();
+
+        setDashboardData((prev) => ({
+          ...prev,
+          recentUsers: usersData.recentUsers.map((user) => ({
+            id: user.id,
+            name: `${user.firstname} ${user.lastname}`,
+            email: user.email,
+            lastLogin: user.lastLogin,
+          })),
+          totalUsers: usersData.totalUsers,
+          popularBooks: booksData,
+        }));
+      } catch (err) {
+        console.error("Error fetching dashboard data:", err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchDashboardData();
+    fetchData();
   }, []);
 
   if (loading) {
     return <div className="dashboard-loading">Loading dashboard data...</div>;
   }
 
-  if (!dashboardData) {
-    return <div className="dashboard-error">Failed to load dashboard data</div>;
+  if (error) {
+    return <div className="dashboard-error">Error: {error}</div>;
   }
 
   // User view (simpler dashboard)
@@ -293,8 +259,8 @@ const HomeComponent = () => {
             <FiUser /> Recent Users
           </h3>
           <ul className="recent-list">
-            {dashboardData.recentUsers.map((user) => (
-              <li key={user.id}>
+            {dashboardData.recentUsers.map((user, index) => (
+              <li key={index}>
                 <div className="user-info">
                   <strong>{user.name}</strong>
                   <span>{user.email}</span>
@@ -309,11 +275,11 @@ const HomeComponent = () => {
 
         <div className="recent-card">
           <h3>
-            <FiTrendingUp /> Popular Books
+            <FiTrendingUp /> Top 3 Popular Books
           </h3>
           <ul className="recent-list">
-            {dashboardData.popularBooks.map((book) => (
-              <li key={book.id}>
+            {dashboardData.popularBooks.map((book, index) => (
+              <li key={index}>
                 <div className="book-info">
                   <strong>{book.title}</strong>
                   <span>{book.author}</span>

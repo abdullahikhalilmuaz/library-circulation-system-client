@@ -10,6 +10,7 @@ import AddBook from "./AddBook";
 import ViewBooks from "./ViewBooks";
 import Manage from "../components/Manage";
 import RequestApproval from "../components/RequestApproval";
+import Loan from "../components/Loan";
 import {
   FiBarChart2,
   FiBell,
@@ -72,7 +73,7 @@ export default function Home() {
       case "approvals":
         return <RequestApproval />;
       case "work":
-        return <div>Developer working on it</div>;
+        return <Loan />;
       case "cart":
         return <Cart />;
       default:
@@ -175,7 +176,7 @@ export default function Home() {
           <div className="nav-icon">
             <FiBriefcase />
           </div>
-          <div className="nav-label">Work</div>
+          <div className="nav-label">Loans</div>
         </div>
       </div>
     </div>
