@@ -1,185 +1,159 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import "../styles/addRequest.css";
+import "../styles/newBookRequest.css";
 
-// const role = JSON.parse(localStorage.getItem("dear-user"));
-const URL = "https://circulation-system-server-ql2i.onrender.com/api/makerequest";
+const API_BASE = "http://localhost:3000/api";
+const NEW_BOOK_REQUEST_URL = `${API_BASE}/newBookRequest`;
 
-const role = JSON.parse(localStorage.getItem("dear-user"));
-export default function AddRequest() {
+export default function NewBookRequest() {
+  const user = JSON.parse(localStorage.getItem("dear-user"));
   const [requestForm, setRequestForm] = useState({
-    username: role.firstname + " " + role.lastname,
-    role: role.role,
-    bookname: "",
-    matric_no: "",
-    color: "red",
+    userId: user.id,
+    username: `${user.firstname} ${user.lastname}`,
+    bookTitle: "",
+    author: "",
+    isbn: "",
+    reason: "",
+    urgency: "normal",
   });
-
   const [requests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setRequestForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
+    setRequestForm((prev) => ({ ...prev, [name]: value }));
+  };
 
-  async function sendData(e) {
+  const fetchUserRequests = async () => {
+    try {
+      const res = await fetch(`${NEW_BOOK_REQUEST_URL}?userId=${user.id}`);
+      if (!res.ok) throw new Error("Failed to fetch requests");
+      const data = await res.json();
+      setRequests(data.requests || []);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const res = await fetch(URL, {
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch(NEW_BOOK_REQUEST_URL, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestForm),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        throw new Error(data.message || "Failed to submit request");
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Request failed");
       }
 
-      toast.success(data.message || "Request submitted successfully!");
-      setRequests([...requests, data.data]);
+      toast.success("New book request submitted!");
       setRequestForm({
-        ...requestForm,
-        bookname: "",
-        matric_no: "",
-        color: "red",
+        userId: user.id,
+        username: `${user.firstname} ${user.lastname}`,
+        bookTitle: "",
+        author: "",
+        isbn: "",
+        reason: "",
+        urgency: "normal",
       });
+      fetchUserRequests();
     } catch (error) {
-      console.error("Error submitting request:", error);
-      toast.error(
-        error.message || "An error occurred while submitting the request"
-      );
+      toast.error(error.message);
     } finally {
       setIsLoading(false);
     }
-  }
-
-  // Function to fetch requests
-  const fetchRequests = async () => {
-    try {
-      const res = await fetch("https://circulation-system-server-ql2i.onrender.com/api/makerequest/get");
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to fetch requests");
-      }
-
-      setRequests(data.data || []);
-    } catch (error) {
-      console.error("Error fetching requests:", error);
-      toast.error(error.message || "Failed to load requests");
-    }
   };
 
-  // Load requests on component mount
   useEffect(() => {
-    fetchRequests();
+    fetchUserRequests();
   }, []);
 
   return (
-    <div className="request-container">
-      <div className="request-card">
-        <h2 className="request-title">📚 Make Request To Admins</h2>
+    <div className="new-book-request-container">
+      <h2>📖 Request New Book Acquisition</h2>
 
-        <form onSubmit={sendData} className="request-form">
-          <div className="form-group">
-            <label htmlFor="bookname" className="form-label">
-              Book Name
-            </label>
-            <input
-              type="text"
-              id="bookname"
-              name="bookname"
-              placeholder="Enter book name"
-              value={requestForm.bookname}
-              onChange={handleChange}
-              className="form-input"
-              required
-            />
-          </div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Book Title *</label>
+          <input
+            name="bookTitle"
+            value={requestForm.bookTitle}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-          <div className="form-group">
-            <label htmlFor="matric_no" className="form-label">
-              Matric Number
-            </label>
-            <input
-              type="text"
-              id="matric_no"
-              name="matric_no"
-              placeholder="Enter matric number"
-              value={requestForm.matric_no}
-              onChange={handleChange}
-              className="form-input"
-              required
-            />
-          </div>
+        <div className="form-group">
+          <label>Author *</label>
+          <input
+            name="author"
+            value={requestForm.author}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-          <div className="form-group">
-            <label htmlFor="color" className="form-label">
-              Select Color
-            </label>
-            <select
-              id="color"
-              name="color"
-              value={requestForm.color}
-              onChange={handleChange}
-              className="form-select"
-            >
-              <option value="red">🔴 Red</option>
-              <option value="blue">🔵 Blue</option>
-              <option value="orange">🟠 Orange</option>
-              <option value="purple">🟣 Purple</option>
-              <option value="green">🟢 Green</option>
-            </select>
-          </div>
+        <div className="form-group">
+          <label>ISBN (if known)</label>
+          <input name="isbn" value={requestForm.isbn} onChange={handleChange} />
+        </div>
 
-          <button type="submit" className="submit-btn">
-            Submit Request
-          </button>
-        </form>
-      </div>
+        <div className="form-group">
+          <label>Reason for Request *</label>
+          <textarea
+            name="reason"
+            value={requestForm.reason}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Urgency</label>
+          <select
+            name="urgency"
+            value={requestForm.urgency}
+            onChange={handleChange}
+          >
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Submitting..." : "Submit Request"}
+        </button>
+      </form>
 
       {requests.length > 0 && (
-        <div className="requests-table-container">
-          <h3 className="table-title">Your Requests</h3>
-          <div className="table-wrapper">
-            <table className="requests-table">
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Role</th>
-                  <th>Book Name</th>
-                  <th>Matric Number</th>
-                  <th>Color</th>
-                  <th>Status</th>
+        <div className="requests-list">
+          <h3>Previous Requests</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Book Title</th>
+                <th>Status</th>
+                <th>Date Requested</th>
+              </tr>
+            </thead>
+            <tbody>
+              {requests.map((request) => (
+                <tr key={request._id}>
+                  <td>{request.bookTitle}</td>
+                  <td className={`status-${request.status}`}>
+                    {request.status}
+                  </td>
+                  <td>{new Date(request.createdAt).toLocaleDateString()}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {requests.map((req, index) => (
-                  <tr key={index}>
-                    <td>{req.username}</td>
-                    <td>{req.role}</td>
-                    <td>{req.bookname}</td>
-                    <td>{req.matric_no}</td>
-                    <td>
-                      <span
-                        className="color-badge"
-                        style={{ backgroundColor: req.color }}
-                      ></span>
-                    </td>
-                    <td>{req.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

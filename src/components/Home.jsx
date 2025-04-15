@@ -13,11 +13,9 @@ import RequestApproval from "../components/RequestApproval";
 import Loan from "../components/Loan";
 import {
   FiBarChart2,
-  FiBell,
   FiBook,
   FiBriefcase,
   FiCheckCircle,
-  FiClock,
   FiHome,
   FiUser,
   FiLogOut,
@@ -49,11 +47,6 @@ export default function Home() {
     localStorage.removeItem("user-role");
     toast.success("Logged out successfully");
     navigate("/register");
-  };
-
-  const handleCart = () => {
-    setActiveComponent("cart");
-    setShowComponent("cart");
   };
 
   const renderComponent = () => {
@@ -103,8 +96,6 @@ export default function Home() {
           </h5>
         </div>
         <div className="nav2">
-          <FiBell />
-          <FiShoppingCart onClick={handleCart} style={{ cursor: "pointer" }} />
           <FiLogOut
             onClick={handleLogout}
             style={{ color: "red", cursor: "pointer" }}
@@ -163,21 +154,32 @@ export default function Home() {
           </div>
         )}
 
-        {/* Statistics */}
-        <div className="nav-item" onClick={() => setActiveComponent("stats")}>
-          <div className="nav-icon">
-            <FiBarChart2 />
+        {/* Manage (only for admin) */}
+        {userRole === "admin" && (
+          <div className="nav-item" onClick={() => setActiveComponent("stats")}>
+            <div className="nav-icon">
+              <FiBarChart2 />
+            </div>
+            <div className="nav-label">Manage</div>
           </div>
-          <div className="nav-label">Manage</div>
-        </div>
+        )}
 
-        {/* Work */}
-        <div className="nav-item" onClick={() => setActiveComponent("work")}>
-          <div className="nav-icon">
-            <FiBriefcase />
+        {/* Conditional bottom nav item - Cart for users, Loans for others */}
+        {userRole === "user" ? (
+          <div className="nav-item" onClick={() => setActiveComponent("cart")}>
+            <div className="nav-icon">
+              <FiShoppingCart />
+            </div>
+            <div className="nav-label">Cart</div>
           </div>
-          <div className="nav-label">Loans</div>
-        </div>
+        ) : (
+          <div className="nav-item" onClick={() => setActiveComponent("work")}>
+            <div className="nav-icon">
+              <FiBriefcase />
+            </div>
+            <div className="nav-label">Loans</div>
+          </div>
+        )}
       </div>
     </div>
   );

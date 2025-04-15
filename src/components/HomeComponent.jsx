@@ -32,11 +32,11 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 const HomeComponent = () => {
   const [dashboardData, setDashboardData] = useState({
     totalBooks: 5,
-    availableBooks: 876,
-    checkedOutBooks: 367,
+    availableBooks: 6,
+    checkedOutBooks: 7,
     totalUsers: 542,
-    pendingApprovals: 23,
-    overdueBooks: 15,
+    pendingApprovals: 2,
+    overdueBooks: 5,
     recentUsers: [],
     popularBooks: [],
     bookStatusData: [

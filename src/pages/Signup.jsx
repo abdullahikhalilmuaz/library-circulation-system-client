@@ -3,8 +3,7 @@ import "../styles/login.css";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const BASE_API_URL =
-  "https://circulation-system-server-ql2i.onrender.com/api/auth/signup";
+const BASE_API_URL = "http://localhost:3000/api/auth/signup";
 
 export default function Signup({ role }) {
   const [userSignup, setUserSignup] = useState({

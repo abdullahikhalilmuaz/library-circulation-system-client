@@ -5,6 +5,8 @@ import {
   FiUser,
   FiShoppingCart,
   FiRefreshCw,
+  FiSearch,
+  FiX,
 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import "../styles/viewBooks.css";
@@ -14,10 +16,11 @@ export default function ViewBooks() {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [search, setSearch] = useState("");
 
   const fetchBooks = async () => {
     try {
-      const response = await fetch("https://circulation-system-server-ql2i.onrender.com/api/admin/books");
+      const response = await fetch("http://localhost:3000/api/admin/books");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -46,7 +49,7 @@ export default function ViewBooks() {
     }
 
     try {
-      const response = await fetch("https://circulation-system-server-ql2i.onrender.com/api/cart", {
+      const response = await fetch("http://localhost:3000/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +78,12 @@ export default function ViewBooks() {
 
   const handleRefresh = () => {
     setRefreshing(true);
+    setSearch("");
     fetchBooks();
+  };
+
+  const clearSearch = () => {
+    setSearch("");
   };
 
   if (loading) {
@@ -106,9 +114,46 @@ export default function ViewBooks() {
         </button>
       </div>
 
+      <div className="search-container">
+        <div className="search-bar">
+          <FiSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search books by title, author, ISBN or section..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          {search && (
+            <button className="clear-search" onClick={clearSearch}>
+              <FiX />
+            </button>
+          )}
+        </div>
+      </div>
+
       <div className="books-grid">
-        {books.length > 0 ? (
-          books.map((book) => (
+        {books
+          .filter((book) => {
+            if (
+              search.toLocaleLowerCase() === "" ||
+              search.toUpperCase() === ""
+            ) {
+              return book;
+            } else {
+              return (
+                book.title.toLocaleLowerCase().includes(search) ||
+                book.title.toUpperCase().includes(search) ||
+                book.author.toLocaleLowerCase().includes(search) ||
+                book.author.toUpperCase().includes(search) ||
+                book.isbn.toLocaleLowerCase().includes(search) ||
+                book.isbn.toUpperCase().includes(search) ||
+                (book.section &&
+                  (book.section.toLocaleLowerCase().includes(search) ||
+                    book.section.toUpperCase().includes(search)))
+              );
+            }
+          })
+          .map((book) => (
             <div key={book.id} className="book-card">
               <div className="book-cover">
                 <FiBook size={48} />
@@ -151,7 +196,7 @@ export default function ViewBooks() {
                   <p className="book-description">{book.description}</p>
                 )}
 
-                <button 
+                <button
                   onClick={() => addToCart(book)}
                   disabled={book.quantity <= 0}
                   className={`cart-btn ${book.quantity <= 0 ? "disabled" : ""}`}
@@ -160,8 +205,38 @@ export default function ViewBooks() {
                 </button>
               </div>
             </div>
-          ))
-        ) : (
+          ))}
+
+        {books.filter((book) => {
+          if (
+            search.toLocaleLowerCase() === "" ||
+            search.toUpperCase() === ""
+          ) {
+            return false;
+          } else {
+            return (
+              book.title.toLocaleLowerCase().includes(search) ||
+              book.title.toUpperCase().includes(search) ||
+              book.author.toLocaleLowerCase().includes(search) ||
+              book.author.toUpperCase().includes(search) ||
+              book.isbn.toLocaleLowerCase().includes(search) ||
+              book.isbn.toUpperCase().includes(search) ||
+              (book.section &&
+                (book.section.toLocaleLowerCase().includes(search) ||
+                  book.section.toUpperCase().includes(search)))
+            );
+          }
+        }).length === 0 &&
+          search !== "" && (
+            <div className="no-books">
+              <p>No books found matching "{search}"</p>
+              <button onClick={clearSearch} className="refresh-btn">
+                <FiX /> Clear Search
+              </button>
+            </div>
+          )}
+
+        {books.length === 0 && search === "" && (
           <div className="no-books">
             <p>No books available at the moment. Please check back later.</p>
             <button onClick={handleRefresh} className="refresh-btn">

@@ -18,7 +18,7 @@ export default function RequestApproval() {
   const fetchRequests = async () => {
     try {
       setLoading((prev) => ({ ...prev, fetch: true }));
-      const response = await fetch("https://circulation-system-server-ql2i.onrender.com/api/requests");
+      const response = await fetch("http://localhost:3000/api/requests");
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -40,7 +40,7 @@ export default function RequestApproval() {
     try {
       setLoading((prev) => ({ ...prev, approve: requestId }));
       const response = await fetch(
-        `https://circulation-system-server-ql2i.onrender.com/api/requests/${requestId}/approve`,
+        `http://localhost:3000/api/requests/${requestId}/approve`,
         { method: "PUT" }
       );
 
@@ -64,7 +64,7 @@ export default function RequestApproval() {
     try {
       setLoading((prev) => ({ ...prev, reject: requestId }));
       const response = await fetch(
-        `https://circulation-system-server-ql2i.onrender.com/api/requests/${requestId}/reject`,
+        `http://localhost:3000/api/requests/${requestId}/reject`,
         { method: "PUT" }
       );
 

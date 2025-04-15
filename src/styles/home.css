@@ -22,7 +22,8 @@
   left: 0;
   right: 0;
   height: 50px;
-  background-color: white;
+  background-color: #004085;
+  color: white;
   border-bottom: 0.1px solid rgba(97, 95, 95, 0.1);
 }
 .home-container-header .nav2 {
@@ -46,7 +47,8 @@
   right: 0;
   bottom: 0;
   height: 50px;
-  background-color: white;
+  background-color: #004085;
+  color: white;
   font-size: 20px;
   border-top: 0.1px solid rgba(97, 95, 95, 0.1);
 }
