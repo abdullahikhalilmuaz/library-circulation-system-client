@@ -16,7 +16,9 @@ const DisplayAdminRequest = () => {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/api/newBookRequest");
+      const response = await fetch(
+        "https://circulation-system-server-1.onrender.com/api/newBookRequest"
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -36,7 +38,7 @@ const DisplayAdminRequest = () => {
   const updateRequestStatus = async (requestId, status) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/newBookRequest/${requestId}/status`,
+        `https://circulation-system-server-1.onrender.com/api/newBookRequest/${requestId}/status`,
         {
           method: "PUT",
           headers: {

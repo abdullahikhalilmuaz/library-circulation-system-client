@@ -1,6 +1,9 @@
-const GET_ALL_BOOKS_URL = "http://localhost:3000/api/books/all";
-const GET_RECENT_USERS = "http://localhost:3000/api/dashboard/stats";
-const GET_POPULAR_BOOKS = "http://localhost:3000/api/books/popular";
+const GET_ALL_BOOKS_URL =
+  "https://circulation-system-server-1.onrender.com/api/books/all";
+const GET_RECENT_USERS =
+  "https://circulation-system-server-1.onrender.com/api/dashboard/stats";
+const GET_POPULAR_BOOKS =
+  "https://circulation-system-server-1.onrender.com/api/books/popular";
 
 import { useEffect, useState } from "react";
 import {

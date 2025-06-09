@@ -17,7 +17,7 @@ export default function Cart() {
     const fetchCart = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/cart/${userData.id}`
+          `https://circulation-system-server-1.onrender.com/api/cart/${userData.id}`
         );
         const data = await response.json();
         setCart(data);
@@ -36,7 +36,7 @@ export default function Cart() {
   const removeFromCart = async (bookId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cart/${userData.id}/items/${bookId}`,
+        `https://circulation-system-server-1.onrender.com/api/cart/${userData.id}/items/${bookId}`,
         { method: "DELETE" }
       );
       const updatedCart = await response.json();
@@ -56,7 +56,7 @@ export default function Cart() {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cart/${userData.id}/checkout`,
+        `https://circulation-system-server-1.onrender.com/api/cart/${userData.id}/checkout`,
         {
           method: "POST",
           headers: {

@@ -20,7 +20,9 @@ export default function ViewBooks() {
 
   const fetchBooks = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/admin/books");
+      const response = await fetch(
+        "https://circulation-system-server-1.onrender.com/api/admin/books"
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -49,22 +51,25 @@ export default function ViewBooks() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userData.id,
-          book: {
-            id: book.id,
-            title: book.title,
-            author: book.author,
-            isbn: book.isbn,
-            section: book.section,
+      const response = await fetch(
+        "https://circulation-system-server-1.onrender.com/api/cart",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        }),
-      });
+          body: JSON.stringify({
+            userId: userData.id,
+            book: {
+              id: book.id,
+              title: book.title,
+              author: book.author,
+              isbn: book.isbn,
+              section: book.section,
+            },
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to add to cart");
 

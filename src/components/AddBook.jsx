@@ -29,13 +29,16 @@ export default function AddBook() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/admin/books", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookData),
-      });
+      const response = await fetch(
+        "https://circulation-system-server-1.onrender.com/api/admin/books",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookData),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to add book");

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-const URL = "http://localhost:3000/api/makerequest/get";
+const URL =
+  "https://circulation-system-server-1.onrender.com/api/makerequest/get";
 export default function RequestComponent() {
   const [requestData, setRequestData] = useState([]);
   async function fetchRequests() {
