@@ -25,7 +25,6 @@ A **React + Vite** frontend for a Library Circulation System. It connects to a N
 
 ## 📸 Demo Screenshots
 
-> Add your screenshots in a folder called `/screenshots` and reference them like this:
-
-```md
-![Dashboard](./screenshots/lib1.png)
+![Image](https://github.com/user-attachments/assets/a151b51b-5eb1-4d63-bcec-041b1a229793)
+![Image](https://github.com/user-attachments/assets/33565030-cc6f-473c-adef-e90ad3321aa9)
+![Image](https://github.com/user-attachments/assets/073e0937-69fd-4ad3-aebc-408fd0229631)
