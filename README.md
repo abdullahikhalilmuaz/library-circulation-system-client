@@ -1,12 +1,31 @@
-# React + Vite
+# 📚 Library Circulation System (Client)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **React + Vite** frontend for a Library Circulation System. It connects to a Node.js backend and provides a complete system for managing library books, users, requests, and circulation.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧭 Table of Contents
 
-## Expanding the ESLint configuration
+- [Demo Screenshots](#demo-screenshots)
+- [Features](#features)
+  - [Admin Features](#admin-features)
+  - [User Features](#user-features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Environment Variables](#environment-variables)
+  - [Running the App](#running-the-app)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📸 Demo Screenshots
+
+> Add your screenshots in a folder called `/screenshots` and reference them like this:
+
+```md
+![Dashboard](./screenshots/lib1.png)
