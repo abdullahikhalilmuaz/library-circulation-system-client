@@ -1,6 +1,9 @@
 # 📚 Library Circulation System (Client)
 A web based Full Stack Library Circulation and Management System, featuring all traditional library, enhancing user, students, and staffs experience.
 
+## 📦 Intro Video
+https://github.com/user-attachments/assets/63bb8054-e621-462c-b6de-2a46357cf570
+
 ## 🧭 Table of Contents
 
 
