@@ -16,9 +16,7 @@ const DisplayAdminRequest = () => {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        "https://circulation-system-server-1.onrender.com/api/newBookRequest"
-      );
+      const response = await fetch("https://circulation-system-server-1.onrender.com/api/newBookRequest");
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

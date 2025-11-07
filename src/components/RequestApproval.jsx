@@ -18,9 +18,7 @@ export default function RequestApproval() {
   const fetchRequests = async () => {
     try {
       setLoading((prev) => ({ ...prev, fetch: true }));
-      const response = await fetch(
-        "https://circulation-system-server-1.onrender.com/api/requests"
-      );
+      const response = await fetch("https://circulation-system-server-1.onrender.com/api/requests");
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
