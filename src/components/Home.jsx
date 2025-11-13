@@ -146,7 +146,7 @@ export default function Home() {
           <div className="nav-label">
             {userRole === "admin" || userRole === "librarian"
               ? "Add Books"
-              : "View Books"}
+              : "Books"}
           </div>
         </div>
 
@@ -205,7 +205,7 @@ export default function Home() {
             <div className="nav-icon">
               <FiShoppingCart />
             </div>
-            <div className="nav-label">My Selections</div>
+            <div className="nav-label">Pick</div>
           </div>
         ) : (
           <div className="nav-item" onClick={() => setActiveComponent("work")}>
