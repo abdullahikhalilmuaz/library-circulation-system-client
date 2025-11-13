@@ -1,110 +1,735 @@
-/* Add to admin.css or requests.css */
+/* adminRequest.css - Fixed Styles for Better Button Visibility */
+
+.admin-container {
+  max-width: 1400px; /* Increased max-width for better spacing */
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.admin-header h2 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 1.8em;
+  font-weight: 600;
 }
 
 .refresh-btn {
-  padding: 8px 12px;
+  padding: 10px 16px;
   background-color: #3498db;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.refresh-btn:hover:not(:disabled) {
+  background-color: #2980b9;
+  transform: translateY(-1px);
 }
 
 .refresh-btn:disabled {
   background-color: #95a5a6;
   cursor: not-allowed;
+  transform: none;
 }
 
 .requests-table-container {
   overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 .requests-table {
   width: 100%;
   border-collapse: collapse;
-}
-
-.requests-table th,
-.requests-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+  min-width: 900px; /* Increased min-width for better spacing */
 }
 
 .requests-table th {
-  background-color: #f2f2f2;
+  background-color: #f8f9fa;
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #2c3e50;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.book-list {
-  margin: 0;
-  padding-left: 20px;
+.requests-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: top;
 }
 
-.book-list li {
-  margin-bottom: 5px;
+.request-row:hover {
+  background-color: #f8f9fa;
 }
 
-.status-badge {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.8em;
-  font-weight: bold;
-}
-
-.status-badge.pending {
-  background-color: #f39c12;
-  color: white;
-}
-
-.status-badge.confirmed {
-  background-color: #2ecc71;
-  color: white;
-}
-
-.status-badge.rejected {
-  background-color: #e74c3c;
-  color: white;
-}
-
-.action-buttons {
+/* User Info Styles */
+.user-info, .date-info, .books-summary {
   display: flex;
+  align-items: center;
   gap: 8px;
 }
 
-.approve-btn {
-  background-color: #2ecc71;
-  color: white;
+.user-info svg, .date-info svg, .books-summary svg {
+  color: #6c757d;
+  flex-shrink: 0;
+}
+
+/* Books Summary Styles */
+.books-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.books-count {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 80px; /* Ensure minimum width */
+}
+
+.books-count strong {
+  color: #2c3e50;
+  font-size: 0.95em;
+}
+
+.books-breakdown {
+  display: flex;
+  gap: 8px;
+  font-size: 0.8em;
+  flex-wrap: wrap; /* Allow count badges to wrap */
+}
+
+.approved-count {
+  color: #27ae60;
+  font-weight: bold;
+  background: #d4edda;
+  padding: 2px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.rejected-count {
+  color: #e74c3c;
+  font-weight: bold;
+  background: #f8d7da;
+  padding: 2px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.pending-count {
+  color: #f39c12;
+  font-weight: bold;
+  background: #fff3cd;
+  padding: 2px 6px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.expand-toggle {
+  background: none;
   border: none;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.expand-toggle:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+/* Status Badge Styles */
+.status-badge {
   padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: capitalize;
+  display: inline-block;
+  min-width: 100px; /* Increased min-width */
+  text-align: center;
+  white-space: nowrap;
+}
+
+.status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.status-badge.partially_approved {
+  background-color: #d1edff;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.status-badge.partially_rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.status-badge.approved {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.status-badge.rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.status-badge.confirmed {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Action Buttons - FIXED FOR BETTER VISIBILITY */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap; /* Allow buttons to wrap if needed */
+  min-width: 200px; /* Ensure minimum width for action column */
+}
+
+.approve-btn, .reject-btn {
+  border: none;
+  padding: 10px 14px; /* Increased padding for better touch targets */
   border-radius: 4px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px; /* Slightly increased gap */
+  font-size: 0.85em;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap; /* Prevent text wrapping */
+  min-width: 100px; /* Minimum button width */
+  justify-content: center; /* Center content */
+}
+
+.approve-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.approve-btn:hover:not(:disabled) {
+  background-color: #218838;
+  transform: translateY(-1px);
 }
 
 .reject-btn {
-  background-color: #e74c3c;
+  background-color: #dc3545;
   color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+}
+
+.reject-btn:hover:not(:disabled) {
+  background-color: #c82333;
+  transform: translateY(-1px);
 }
 
 .approve-btn:disabled,
 .reject-btn:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+}
+
+.completed-badge {
+  padding: 8px 12px;
+  background: #28a745;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Expanded Row Styles */
+.expanded-row {
+  background-color: #f8f9fa;
+}
+
+.expanded-row td {
+  padding: 0;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.expanded-content {
+  padding: 25px;
+  background: white;
+}
+
+.expanded-content h4 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-size: 1.3em;
+  font-weight: 600;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+}
+
+/* Request Progress */
+.request-progress {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.progress-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9em;
+  flex-wrap: wrap; /* Allow stats to wrap on smaller screens */
+}
+
+.progress-stats .stat {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.progress-stats .stat.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.progress-stats .stat.rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.progress-stats .stat.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* Books Grid - IMPROVED LAYOUT */
+.books-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); /* Increased min-width */
+}
+
+.book-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  background: #fafafa;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px; /* Ensure minimum height */
+}
+
+.book-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.book-card.pending {
+  border-left: 4px solid #ffc107;
+}
+
+.book-card.approved {
+  border-left: 4px solid #28a745;
+}
+
+.book-card.rejected {
+  border-left: 4px solid #dc3545;
+}
+
+/* FIXED BOOK HEADER LAYOUT */
+.book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex: 1; /* Allow header to grow */
+}
+
+.book-info {
+  flex: 1;
+  min-width: 0; /* Prevent flex item from overflowing */
+}
+
+.book-info h5 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.3;
+  word-wrap: break-word; /* Allow long titles to break */
+}
+
+.book-meta {
+  margin: 0;
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.5;
+}
+
+.book-meta strong {
+  color: #495057;
+}
+
+/* FIXED BOOK ACTIONS SECTION - IMPROVED LAYOUT */
+.book-actions-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  min-width: 280px; /* Increased minimum width */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.book-status-badge {
+  padding: 6px 12px; /* Increased padding */
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.book-status-pending {
+  background-color: #f39c12;
+  color: white;
+}
+
+.book-status-approved {
+  background-color: #27ae60;
+  color: white;
+}
+
+.book-status-rejected {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Book Action Form - IMPROVED BUTTON VISIBILITY */
+.book-action-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  min-width: 250px; /* Ensure minimum width */
+}
+
+.book-notes-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9em;
+  resize: vertical;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  min-height: 60px; /* Minimum height for textarea */
+}
+
+.book-notes-textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* FIXED BOOK ACTION BUTTONS - BETTER VISIBILITY */
+.book-action-buttons {
+  display: flex;
+  gap: 10px; /* Increased gap */
+  width: 100%;
+}
+
+.approve-book-btn, .reject-book-btn {
+  border: none;
+  padding: 10px 16px; /* Increased padding */
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85em;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  flex: 1;
+  justify-content: center;
+  min-width: 110px; /* Minimum button width */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.approve-book-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.approve-book-btn:hover:not(:disabled) {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+.reject-book-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.reject-book-btn:hover:not(:disabled) {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+.approve-book-btn:disabled,
+.reject-book-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Book Status Info */
+.book-status-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+  min-width: 250px; /* Ensure minimum width */
+}
+
+.book-admin-notes {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0; /* Prevent overflow */
+}
+
+.notes-icon {
+  color: #856404;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.notes-content {
+  flex: 1;
+  min-width: 0; /* Prevent text overflow */
+}
+
+.notes-content strong {
+  color: #856404;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.9em;
+}
+
+.notes-content p {
+  margin: 0;
+  color: #856404;
+  font-size: 0.85em;
+  line-height: 1.4;
+  word-wrap: break-word; /* Allow long text to break */
+}
+
+.processed-date {
+  font-size: 0.8em;
+  color: #6c757d;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* Empty State */
+.no-requests {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6c757d;
+}
+
+.no-requests p {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.show-all-btn {
+  margin-top: 15px;
+  padding: 10px 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.show-all-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Loading States */
+.loading-spinner {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+  font-size: 1.1em;
+}
+
+/* IMPROVED RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .admin-container {
+    padding: 15px;
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 10px;
+  }
+  
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .requests-table {
+    min-width: 700px; /* Adjusted for mobile */
+  }
+  
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .book-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .book-actions-section {
+    align-items: stretch;
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .progress-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .book-action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .approve-btn, .reject-btn {
+    width: 100%; /* Full width buttons on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .requests-table {
+    min-width: 550px;
+  }
+  
+  .books-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .expand-toggle {
+    align-self: flex-start;
+  }
+  
+  .book-action-form {
+    min-width: auto;
+  }
+  
+  .book-actions-section {
+    min-width: auto;
+  }
+}
+
+/* Ensure table columns have proper spacing */
+.requests-table th:nth-child(1), .requests-table td:nth-child(1) { /* User ID */
+  width: 10%;
+  min-width: 80px;
+}
+
+.requests-table th:nth-child(2), .requests-table td:nth-child(2) { /* Registration */
+  width: 15%;
+  min-width: 120px;
+}
+
+.requests-table th:nth-child(3), .requests-table td:nth-child(3) { /* Books */
+  width: 20%;
+  min-width: 150px;
+}
+
+.requests-table th:nth-child(4), .requests-table td:nth-child(4) { /* Date */
+  width: 15%;
+  min-width: 100px;
+}
+
+.requests-table th:nth-child(5), .requests-table td:nth-child(5) { /* Status */
+  width: 15%;
+  min-width: 120px;
+}
+
+.requests-table th:nth-child(6), .requests-table td:nth-child(6) { /* Actions */
+  width: 25%;
+  min-width: 200px;
 }

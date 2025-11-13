@@ -9,8 +9,10 @@ import Cart from "../components/Cart";
 import AddBook from "./AddBook";
 import ViewBooks from "./ViewBooks";
 import Manage from "../components/Manage";
+import Discover from "../components/Discover";
 import RequestApproval from "../components/RequestApproval";
 import Loan from "../components/Loan";
+import ManageRecommendations from "./ManageRecommendations";
 import {
   FiBarChart2,
   FiBook,
@@ -21,6 +23,9 @@ import {
   FiLogOut,
   FiGitPullRequest,
   FiShoppingCart,
+  FiCompass,
+  FiStar,
+  FiThumbsUp,
 } from "react-icons/fi";
 
 export default function Home() {
@@ -69,6 +74,10 @@ export default function Home() {
         return <Loan />;
       case "cart":
         return <Cart />;
+      case "recommendations":
+        return <Discover showRecommendations={true} />;
+      case "manage-recommendations":
+        return <ManageRecommendations />;
       default:
         return <HomeComponent />;
     }
@@ -141,6 +150,32 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Discover (for users) */}
+        {userRole === "user" && (
+          <div
+            className="nav-item"
+            onClick={() => setActiveComponent("recommendations")}
+          >
+            <div className="nav-icon">
+              <FiCompass />
+            </div>
+            <div className="nav-label">Recomendation</div>
+          </div>
+        )}
+
+        {/* Manage Recommendations (for admins/librarians) */}
+        {(userRole === "admin" || userRole === "librarian") && (
+          <div
+            className="nav-item"
+            onClick={() => setActiveComponent("manage-recommendations")}
+          >
+            <div className="nav-icon">
+              <FiThumbsUp />
+            </div>
+            <div className="nav-label">Recommend</div>
+          </div>
+        )}
+
         {/* Approvals (for admins/librarians) */}
         {(userRole === "admin" || userRole === "librarian") && (
           <div
@@ -170,7 +205,7 @@ export default function Home() {
             <div className="nav-icon">
               <FiShoppingCart />
             </div>
-            <div className="nav-label">Cart</div>
+            <div className="nav-label">My Selections</div>
           </div>
         ) : (
           <div className="nav-item" onClick={() => setActiveComponent("work")}>

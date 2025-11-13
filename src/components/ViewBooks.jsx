@@ -20,7 +20,7 @@ export default function ViewBooks() {
 
   const fetchBooks = async () => {
     try {
-      const response = await fetch("https://circulation-system-server-1.onrender.com/api/admin/books");
+      const response = await fetch("http://localhost:3000/api/admin/books");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -49,7 +49,7 @@ export default function ViewBooks() {
     }
 
     try {
-      const response = await fetch("https://circulation-system-server-1.onrender.com/api/cart", {
+      const response = await fetch("http://localhost:3000/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,13 +63,14 @@ export default function ViewBooks() {
             isbn: book.isbn,
             section: book.section,
           },
+          clearExisting: true // This tells the backend to clear existing cart
         }),
       });
 
       if (!response.ok) throw new Error("Failed to add to cart");
 
       const updatedCart = await response.json();
-      toast.success(`${book.title} added to cart`);
+      toast.success(`${book.title} added to cart (previous items cleared)`);
     } catch (error) {
       toast.error(error.message);
       console.error("Cart error:", error);
@@ -102,7 +103,7 @@ export default function ViewBooks() {
           <h1>
             <FiBook /> Our Book Collection
           </h1>
-          <p className="subtitle">Browse and add books to your cart</p>
+          <p className="subtitle">Browse and add books to your cart (replaces existing items)</p>
         </div>
         <button
           onClick={handleRefresh}
@@ -134,22 +135,15 @@ export default function ViewBooks() {
       <div className="books-grid">
         {books
           .filter((book) => {
-            if (
-              search.toLocaleLowerCase() === "" ||
-              search.toUpperCase() === ""
-            ) {
+            const searchLower = search.toLowerCase();
+            if (searchLower === "") {
               return book;
             } else {
               return (
-                book.title.toLocaleLowerCase().includes(search) ||
-                book.title.toUpperCase().includes(search) ||
-                book.author.toLocaleLowerCase().includes(search) ||
-                book.author.toUpperCase().includes(search) ||
-                book.isbn.toLocaleLowerCase().includes(search) ||
-                book.isbn.toUpperCase().includes(search) ||
-                (book.section &&
-                  (book.section.toLocaleLowerCase().includes(search) ||
-                    book.section.toUpperCase().includes(search)))
+                book.title.toLowerCase().includes(searchLower) ||
+                book.author.toLowerCase().includes(searchLower) ||
+                book.isbn.toLowerCase().includes(searchLower) ||
+                (book.section && book.section.toLowerCase().includes(searchLower))
               );
             }
           })
@@ -208,22 +202,15 @@ export default function ViewBooks() {
           ))}
 
         {books.filter((book) => {
-          if (
-            search.toLocaleLowerCase() === "" ||
-            search.toUpperCase() === ""
-          ) {
+          const searchLower = search.toLowerCase();
+          if (searchLower === "") {
             return false;
           } else {
             return (
-              book.title.toLocaleLowerCase().includes(search) ||
-              book.title.toUpperCase().includes(search) ||
-              book.author.toLocaleLowerCase().includes(search) ||
-              book.author.toUpperCase().includes(search) ||
-              book.isbn.toLocaleLowerCase().includes(search) ||
-              book.isbn.toUpperCase().includes(search) ||
-              (book.section &&
-                (book.section.toLocaleLowerCase().includes(search) ||
-                  book.section.toUpperCase().includes(search)))
+              book.title.toLowerCase().includes(searchLower) ||
+              book.author.toLowerCase().includes(searchLower) ||
+              book.isbn.toLowerCase().includes(searchLower) ||
+              (book.section && book.section.toLowerCase().includes(searchLower))
             );
           }
         }).length === 0 &&
