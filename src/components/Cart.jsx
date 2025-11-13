@@ -229,14 +229,6 @@ export default function Cart() {
                   </div>
                 </div>
                 
-                {canRemoveItems && (
-                  // <button
-                  //   onClick={() => removeFromCart(item.id)}
-                  //   className="remove-btn"
-                  // >
-                  //   <FiTrash2 /> Remove
-                  // </button>
-                )}
               </div>
             ))}
           </div>
@@ -269,7 +261,7 @@ export default function Cart() {
                   "Processing..."
                 ) : (
                   <>
-                    <FiCheckCircle /> Checkout
+                    <FiCheckCircle /> Loan
                   </>
                 )}
               </button>
