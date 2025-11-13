@@ -29,7 +29,7 @@ const UserRecommendationForm = ({
 
     setSubmitting(true);
     try {
-      const response = await fetch('http://localhost:3000/api/user-recommendations', {
+      const response = await fetch('https://circulation-system-server-1.onrender.com/api/user-recommendations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -274,7 +274,7 @@ export default function Discover() {
   // Fetch recommendations from backend
   const fetchRecommendations = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/recommendations');
+      const response = await fetch('https://circulation-system-server-1.onrender.com/api/recommendations');
       const data = await response.json();
       
       if (data.success) {
@@ -295,7 +295,7 @@ export default function Discover() {
   // Fetch student recommendations
   const fetchStudentRecommendations = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/user-recommendations');
+      const response = await fetch('https://circulation-system-server-1.onrender.com/api/user-recommendations');
       const data = await response.json();
       
       if (data.success) {
@@ -320,7 +320,7 @@ export default function Discover() {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/recommendations/rate/${bookId}`, {
+      const response = await fetch(`https://circulation-system-server-1.onrender.com/api/recommendations/rate/${bookId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
