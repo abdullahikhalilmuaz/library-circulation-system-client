@@ -145,7 +145,7 @@ export default function Home() {
           </div>
           <div className="nav-label">
             {userRole === "admin" || userRole === "librarian"
-              ? "Add Books"
+              ? "Add"
               : "Books"}
           </div>
         </div>
