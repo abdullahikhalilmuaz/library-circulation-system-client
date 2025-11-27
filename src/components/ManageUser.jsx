@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/manage.css";
 import DisplayAdminRequest from "../components/DisplayAdminRequest";
 
-const URL = "https://circulation-system-server-1.onrender.com/api/users";
+const URL = "http://localhost:3000/api/users";
 
 export default function ManageUser() {
   const [showRequest, setShowRequest] = useState(false);

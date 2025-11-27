@@ -1,14 +1,13 @@
 import { useState } from "react";
 import "../styles/loan.css";
 
-const POST_URL = "https://circulation-system-server-1.onrender.com/api/loan";
+const POST_URL = "http://localhost:3000/api/loan";
 
 export default function PostLoanTrack({ onSuccess, onCancel }) {
   const [formData, setFormData] = useState({
     id: "",
     firstname: "",
     lastname: "",
-    username: "",
     registration_number: "",
     book_name: "",
     returning_date: "",
@@ -92,7 +91,7 @@ export default function PostLoanTrack({ onSuccess, onCancel }) {
             />
           </div>
 
-          <div className="form-group">
+          {/* <div className="form-group">
             <label>Username</label>
             <input
               type="text"
@@ -101,7 +100,7 @@ export default function PostLoanTrack({ onSuccess, onCancel }) {
               onChange={handleChange}
               required
             />
-          </div>
+          </div> */}
 
           <div className="form-group">
             <label>Matric Number</label>

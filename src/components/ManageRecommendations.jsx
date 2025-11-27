@@ -16,11 +16,11 @@ export default function ManageRecommendations() {
       setLoading(true);
       
       // Fetch all books
-      const booksResponse = await fetch('https://circulation-system-server-1.onrender.com/api/books/all');
+      const booksResponse = await fetch('http://localhost:3000/api/books/all');
       const booksData = await booksResponse.json();
       
       // Fetch current recommendations
-      const recResponse = await fetch('https://circulation-system-server-1.onrender.com/api/recommendations');
+      const recResponse = await fetch('http://localhost:3000/api/recommendations');
       const recData = await recResponse.json();
 
       if (booksData.message) {
@@ -57,7 +57,7 @@ export default function ManageRecommendations() {
     }
 
     try {
-      const response = await fetch('https://circulation-system-server-1.onrender.com/api/recommendations/add', {
+      const response = await fetch('http://localhost:3000/api/recommendations/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default function ManageRecommendations() {
     }
 
     try {
-      const response = await fetch(`https://circulation-system-server-1.onrender.com/api/recommendations/remove/${bookId}`, {
+      const response = await fetch(`http://localhost:3000/api/recommendations/remove/${bookId}`, {
         method: 'DELETE'
       });
 

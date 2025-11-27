@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "../styles/loan.css";
 import PostLoanTrack from "./PostLoanTrack";
 
-const GET_URL = "https://circulation-system-server-1.onrender.com/api/get/loan";
-const UPDATE_URL = "https://circulation-system-server-1.onrender.com/api/update/loan";
+const GET_URL = "http://localhost:3000/api/get/loan";
+const UPDATE_URL = "http://localhost:3000/api/update/loan";
 
 export default function Loan() {
   const [tableData, setTableData] = useState([]);
@@ -105,12 +105,11 @@ export default function Loan() {
                   <tr>
                     <th>S/N</th>
                     <th>User ID</th>
-                    <th>Username</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Matric No</th>
                     <th>Book</th>
-                    <th>Collected?</th>
+                    <th>Collected</th>
                     <th>Date Collected</th>
                     <th>Return Status</th>
                     <th>Date Returned</th>
@@ -121,7 +120,6 @@ export default function Loan() {
                     <tr key={`${loan.id}-${index}`}>
                       <td>{index + 1}</td>
                       <td>{loan.id}</td>
-                      <td>{loan.username}</td>
                       <td>{loan.firstname}</td>
                       <td>{loan.lastname}</td>
                       <td>{loan.registration_number}</td>
