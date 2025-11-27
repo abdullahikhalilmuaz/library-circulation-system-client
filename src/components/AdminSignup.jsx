@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/login.css";
 import { toast } from "react-toastify";
 
-const BASE_ADMIN_API_URL = "http://localhost:3000/api/admin/auth/signup";
+const BASE_ADMIN_API_URL = "https://circulation-system-server-1.onrender.com/api/admin/auth/signup";
 
 export default function AdminSignup() {
   const [adminSignup, setAdminSignup] = useState({

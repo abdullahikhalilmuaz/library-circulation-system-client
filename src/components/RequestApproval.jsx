@@ -22,7 +22,7 @@ export default function RequestApproval() {
   const fetchRequests = async () => {
     try {
       setLoading((prev) => ({ ...prev, fetch: true }));
-      const response = await fetch("http://localhost:3000/api/requests");
+      const response = await fetch("https://circulation-system-server-1.onrender.com/api/requests");
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -54,7 +54,7 @@ export default function RequestApproval() {
     try {
       setLoading((prev) => ({ ...prev, approve: requestId }));
       const response = await fetch(
-        `http://localhost:3000/api/requests/${requestId}/approve`,
+        `https://circulation-system-server-1.onrender.com/api/requests/${requestId}/approve`,
         { 
           method: "PUT",
           headers: {
@@ -84,7 +84,7 @@ export default function RequestApproval() {
     try {
       setLoading((prev) => ({ ...prev, reject: requestId }));
       const response = await fetch(
-        `http://localhost:3000/api/requests/${requestId}/reject`,
+        `https://circulation-system-server-1.onrender.com/api/requests/${requestId}/reject`,
         { 
           method: "PUT",
           headers: {
@@ -120,7 +120,7 @@ export default function RequestApproval() {
       setLoading((prev) => ({ ...prev, bookApprove: `${requestId}-${bookId}` }));
       
       const response = await fetch(
-        `http://localhost:3000/api/requests/${requestId}/books/${bookId}/approve`,
+        `https://circulation-system-server-1.onrender.com/api/requests/${requestId}/books/${bookId}/approve`,
         {
           method: "PUT",
           headers: {
@@ -164,7 +164,7 @@ export default function RequestApproval() {
       setLoading((prev) => ({ ...prev, bookReject: `${requestId}-${bookId}` }));
       
       const response = await fetch(
-        `http://localhost:3000/api/requests/${requestId}/books/${bookId}/reject`,
+        `https://circulation-system-server-1.onrender.com/api/requests/${requestId}/books/${bookId}/reject`,
         {
           method: "PUT",
           headers: {

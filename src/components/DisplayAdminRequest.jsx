@@ -18,7 +18,7 @@ const DisplayAdminRequest = () => {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/api/requests");
+      const response = await fetch("https://circulation-system-server-1.onrender.com/api/requests");
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -38,8 +38,8 @@ const DisplayAdminRequest = () => {
     try {
       setProcessing(true);
       const endpoint = status === "approved" 
-        ? `http://localhost:3000/api/requests/${requestId}/books/${bookId}/approve`
-        : `http://localhost:3000/api/requests/${requestId}/books/${bookId}/reject`;
+        ? `https://circulation-system-server-1.onrender.com/api/requests/${requestId}/books/${bookId}/approve`
+        : `https://circulation-system-server-1.onrender.com/api/requests/${requestId}/books/${bookId}/reject`;
 
       const response = await fetch(endpoint, {
         method: "PUT",
@@ -72,8 +72,8 @@ const DisplayAdminRequest = () => {
     try {
       setProcessing(true);
       const endpoint = status === "approved" 
-        ? `http://localhost:3000/api/requests/${requestId}/approve`
-        : `http://localhost:3000/api/requests/${requestId}/reject`;
+        ? `https://circulation-system-server-1.onrender.com/api/requests/${requestId}/approve`
+        : `https://circulation-system-server-1.onrender.com/api/requests/${requestId}/reject`;
 
       const response = await fetch(endpoint, {
         method: "PUT",
