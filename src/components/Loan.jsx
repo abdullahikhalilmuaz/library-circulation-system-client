@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "../styles/loan.css";
 import PostLoanTrack from "./PostLoanTrack";
 
-const GET_URL = "https://circulation-system-server-1.onrender.com/api/get/loan";
-const UPDATE_URL = "https://circulation-system-server-1.onrender.com/api/update/loan";
+const GET_URL = "https://circulation-system-server-ql2i.onrender.com/api/get/loan";
+const UPDATE_URL = "https://circulation-system-server-ql2i.onrender.com/api/update/loan";
 
 export default function Loan() {
   const [tableData, setTableData] = useState([]);

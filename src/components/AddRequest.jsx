@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "../styles/newBookRequest.css";
 
-const API_BASE = "https://circulation-system-server-1.onrender.com/api";
+const API_BASE = "https://circulation-system-server-ql2i.onrender.com/api";
 const NEW_BOOK_REQUEST_URL = `${API_BASE}/newBookRequest`;
 
 export default function NewBookRequest() {

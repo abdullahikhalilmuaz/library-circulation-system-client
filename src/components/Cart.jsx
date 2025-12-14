@@ -17,7 +17,7 @@ export default function Cart() {
     const fetchCart = async () => {
       try {
         const response = await fetch(
-          `https://circulation-system-server-1.onrender.com/api/cart/${userData.id}`
+          `https://circulation-system-server-ql2i.onrender.com/api/cart/${userData.id}`
         );
         const data = await response.json();
         console.log("Cart data:", data);
@@ -37,7 +37,7 @@ export default function Cart() {
   const removeFromCart = async (bookId) => {
     try {
       const response = await fetch(
-        `https://circulation-system-server-1.onrender.com/api/cart/${userData.id}/items/${bookId}`,
+        `https://circulation-system-server-ql2i.onrender.com/api/cart/${userData.id}/items/${bookId}`,
         { method: "DELETE" }
       );
       
@@ -63,7 +63,7 @@ export default function Cart() {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://circulation-system-server-1.onrender.com/api/cart/${userData.id}/checkout`,
+        `https://circulation-system-server-ql2i.onrender.com/api/cart/${userData.id}/checkout`,
         {
           method: "POST",
           headers: {

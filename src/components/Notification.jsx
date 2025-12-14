@@ -25,7 +25,7 @@ export default function Notification() {
   const fetchAllNotifications = async () => {
     try {
       setLoading(true);
-      const response = await fetch("https://circulation-system-server-1.onrender.com/api/notifications");
+      const response = await fetch("https://circulation-system-server-ql2i.onrender.com/api/notifications");
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -64,7 +64,7 @@ export default function Notification() {
   const markAsRead = async (notificationId) => {
     try {
       const response = await fetch(
-        `https://circulation-system-server-1.onrender.com/api/notifications/${notificationId}/read`,
+        `https://circulation-system-server-ql2i.onrender.com/api/notifications/${notificationId}/read`,
         { method: "PUT" }
       );
 

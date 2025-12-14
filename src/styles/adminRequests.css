@@ -203,3 +203,108 @@
     align-items: flex-start;
   }
 }
+
+
+
+
+
+/* Tab Navigation */
+.request-type-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.tab-btn {
+  padding: 12px 24px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  background: #4a6cf7;
+  color: white;
+  box-shadow: 0 2px 8px rgba(74, 108, 247, 0.3);
+}
+
+.tab-btn:hover:not(.active) {
+  background: #e9ecef;
+}
+
+/* Urgency badges */
+.urgency-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.urgency-low {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.urgency-normal {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.urgency-high {
+  background: #ffebee;
+  color: #c62828;
+}
+
+/* Reason text */
+.reason-text {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid #4a6cf7;
+  margin-top: 5px;
+  display: block;
+  white-space: pre-wrap;
+}
+
+/* Processing button */
+.bulk-approve-btn.processing {
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+}
+
+.bulk-approve-btn.processing:hover {
+  background: linear-gradient(135deg, #f57c00, #e64a19);
+}
+
+/* Request info styling for new book requests */
+.request-info .info-row {
+  display: flex;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.request-info .info-row:last-child {
+  border-bottom: none;
+}
+
+.request-info .info-label {
+  font-weight: 600;
+  color: #555;
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.request-info .info-value {
+  color: #333;
+  flex: 1;
+}

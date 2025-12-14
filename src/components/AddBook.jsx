@@ -29,7 +29,7 @@ export default function AddBook() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://circulation-system-server-1.onrender.com/api/admin/books", {
+      const response = await fetch("https://circulation-system-server-ql2i.onrender.com/api/admin/books", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
